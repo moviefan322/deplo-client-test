@@ -1,5 +1,9 @@
+import Stats from "./Stats";
+import Flashcard from "./Flashcard";
+
 export default interface User {
-  id: number;
   username: string;
   email: string;
+  stats: Stats[];
+  flashcards: Flashcard[];
 }

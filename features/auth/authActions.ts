@@ -10,7 +10,7 @@ import PostFlashcard from "../../types/PostFlashcard";
 
 let backendUrl: string;
 if (process.env.NODE_ENV === "development") {
-  backendUrl = "http://localhost:3001";
+  backendUrl = "https://spanish-app322-ef32a65d357f.herokuapp.com";
 } else {
   backendUrl = "";
 }
@@ -50,7 +50,7 @@ export const loginUser = createAsyncThunk<LoginRes, LoginData>(
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${backendUrl}/auth/login`,
+        `${backendUrl}/auth/signin`,
         { email, password },
         config
       );

@@ -27,15 +27,15 @@ function LoginForm() {
     success,
   } = useSelector((state: any) => state.auth);
 
+  useEffect(() => {
+    if (stateError) {
+      setError(stateError);
+    }
+  }, [stateError, setError]);
+
   const router = useRouter();
   const dispatch = useDispatch();
   const dispatchTyped = dispatch as ThunkDispatch<RootState, null, AnyAction>;
-
-  useEffect(() => {
-    if (stateError) {
-      setError(error);
-    }
-  }, [stateError]);
 
   const switchModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -83,11 +83,11 @@ function LoginForm() {
         email: enteredEmail,
         password: enteredPassword,
       };
-
       dispatchTyped(loginUser(packageData));
-
-      resetForm();
-      router.push("/");
+      if (success) {
+        resetForm();
+        router.push("/");
+      }
     } else {
       setError("Invalid login credentials");
     }
@@ -127,6 +127,8 @@ function LoginForm() {
     return <Spinner />;
   }
 
+  console.log();
+
   return (
     <>
       {isLogin ? (
@@ -154,6 +156,7 @@ function LoginForm() {
             <button type="submit" className="btn btn-primary">
               Login
             </button>
+            {error && <p className={styles.error}>{error}</p>}
           </form>
 
           <div>

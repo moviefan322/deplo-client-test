@@ -92,9 +92,9 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.success = true;
-        state.user = payload.currentUser;
-        state.flashcards = payload.flashcards;
-        state.stats = payload.stats;
+        state.user = payload.user;
+        state.flashcards = payload.user.flashcards;
+        state.stats = payload.user.stats;
         state.token = payload.access_token;
         state.isLoggedIn = true;
       })
@@ -154,5 +154,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, setCredentials, setNewData, isToken } = authSlice.actions;
+export const { logout, setCredentials, setNewData, isToken } =
+  authSlice.actions;
 export default authSlice.reducer;
