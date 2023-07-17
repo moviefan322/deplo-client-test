@@ -11,9 +11,10 @@ import PostFlashcard from "../../types/PostFlashcard";
 let backendUrl: string;
 backendUrl = "https://spanish-app322-ef32a65d357f.herokuapp.com";
 
-let config = {
+const config = {
   headers: {
     "Content-Type": "application/json",
+    authorization: `Bearer ${token}`,
   },
 };
 if (typeof window !== "undefined") {
@@ -126,11 +127,12 @@ export const createFlashcard = createAsyncThunk(
   "auth/createFlashcard",
   async (flashcard: PostFlashcard, { rejectWithValue }) => {
     try {
-      const res = await axios.post(
-        "http://localhost:3001/flashcards",
-        flashcard,
-        config
-      );
+      const res = await axios.post(`${backendUrl}/flashcards`, flashcard, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
 
       const { data } = res;
       return data;
