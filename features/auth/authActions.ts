@@ -11,11 +11,14 @@ import PostFlashcard from "../../types/PostFlashcard";
 let backendUrl: string;
 backendUrl = "https://spanish-app322-ef32a65d357f.herokuapp.com";
 
-const config = {
+let config = {
   headers: {
     "Content-Type": "application/json",
   },
 };
+if (typeof window !== "undefined") {
+  var token = localStorage.getItem("spanishtoken");
+}
 
 export const registerUser = createAsyncThunk<User, RegistrationData>(
   "auth/registerUser",
@@ -76,7 +79,12 @@ export const updateScore = createAsyncThunk(
       const res = await axios.put(
         `${backendUrl}/stats/${id}`,
         { id, score, lessonId, outOf, userId },
-        config
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       const { data } = res;
@@ -95,11 +103,12 @@ export const postScore = createAsyncThunk(
   "auth/postScore",
   async (postScoreData: PostScoreData, { rejectWithValue }) => {
     try {
-      const res = await axios.post(
-        `${backendUrl}/stats`,
-        postScoreData,
-        config
-      );
+      const res = await axios.post(`${backendUrl}/stats`, postScoreData, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+      });
 
       const { data } = res;
       return data;
