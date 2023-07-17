@@ -9,11 +9,8 @@ import PostScoreData from "../../types/PostScoreData";
 import PostFlashcard from "../../types/PostFlashcard";
 
 let backendUrl: string;
-if (process.env.NODE_ENV === "development") {
-  backendUrl = "https://spanish-app322-ef32a65d357f.herokuapp.com";
-} else {
-  backendUrl = "";
-}
+backendUrl = "https://spanish-app322-ef32a65d357f.herokuapp.com";
+
 const config = {
   headers: {
     "Content-Type": "application/json",

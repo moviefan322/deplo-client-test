@@ -44,8 +44,9 @@ const authSlice = createSlice({
     setCredentials: (state, { payload }) => {
       console.log("setcredent", payload);
       if (payload) {
+        console.log("setcredent", payload);
         state.loading = false;
-        state.user = payload.user;
+        state.user = payload;
         state.flashcards = payload.flashcards;
         state.stats = payload.stats;
         state.isLoggedIn = true;

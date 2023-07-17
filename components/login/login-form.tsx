@@ -25,6 +25,7 @@ function LoginForm() {
     user,
     error: stateError,
     success,
+    isLoggedIn,
   } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
@@ -36,6 +37,12 @@ function LoginForm() {
   const router = useRouter();
   const dispatch = useDispatch();
   const dispatchTyped = dispatch as ThunkDispatch<RootState, null, AnyAction>;
+
+  useEffect(() => {
+    if (isLoggedIn && user) {
+      router.push("/");
+    }
+  }, [isLoggedIn, user, router]);
 
   const switchModeHandler = () => {
     setIsLogin((prevState) => !prevState);

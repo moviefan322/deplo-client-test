@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 let baseUrl;
 if (process.env.NODE_ENV === "development") {
-  baseUrl = "http://localhost:3001";
+  baseUrl = "https://spanish-app322-ef32a65d357f.herokuapp.com";
 } else {
   baseUrl = "";
 }
@@ -27,7 +27,7 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     getUserDetails: builder.query({
       query: () => ({
-        url: "/profile",
+        url: "/auth/me",
         method: "GET",
       }),
     }),
