@@ -83,7 +83,7 @@ function LoginForm() {
         email: enteredEmail,
         password: enteredPassword,
       };
-      dispatchTyped(loginUser(packageData));
+      await dispatchTyped(loginUser(packageData));
       if (success) {
         resetForm();
         router.push("/");

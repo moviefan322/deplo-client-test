@@ -6,11 +6,7 @@ function UnitPage({ id, lesson }: { id: string; lesson: string }) {
   const [loading, setLoading] = useState<boolean>(true);
 
   let baseURL: string;
-  if (process.env.NODE_ENV === "development") {
-    baseURL = "http://localhost:3001";
-  } else {
-    baseURL = "";
-  }
+  baseURL = "https://spanish-app322-ef32a65d357f.herokuapp.com";
 
   useEffect(() => {
     const fetchUnit = async () => {
