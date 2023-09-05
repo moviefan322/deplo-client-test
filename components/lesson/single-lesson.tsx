@@ -594,7 +594,7 @@ function SingleLesson({
       nextLesson + 1 > lessonCount &&
       currentExercise === exerciseLength - 1
     ) {
-      return router.push(`/`);
+      return router.push(`/results`);
     }
     if (currentExercise < exerciseLength - 1) {
       return incrementExercise();
